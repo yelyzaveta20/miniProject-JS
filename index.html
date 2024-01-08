@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+    <style>
+        button{
+            height: 20px;
+            width: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(value => value.json())
+    .then(users => {
+        for (const user of users) {
+            let div=document.createElement('div')
+            let a=document.createElement('a')
+            // let p=document.createElement('p')
+            // p.innerText=user.id+' '+user.name+' ';
+            // let button=document.createElement('button')
+            a.innerText=user.id+' '+user.name+' ';
+            // button.innerText='send'
+            // button.href='user-details.html?xxx='+JSON.stringify(user)
+            // p.append(button)
+            a.href='user-details.html?xxx='+JSON.stringify(user)
+            div.append(a)
+            document.body.append(div)
+        }
+    })
+</script>
+</body>
+</html>
