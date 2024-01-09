@@ -27,9 +27,14 @@
             // let button=document.createElement('button')
             a.innerText=user.id+' '+user.name+' ';
             // button.innerText='send'
+            // button.onclick=function () {
+            //     location.href='user-details.html?xxx='+JSON.stringify(user)
+            // }
             // button.href='user-details.html?xxx='+JSON.stringify(user)
             // p.append(button)
             a.href='user-details.html?xxx='+JSON.stringify(user)
+
+
             div.append(a)
             document.body.append(div)
         }
