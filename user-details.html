@@ -6,6 +6,23 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Title</title>
+    <style>
+        .divUserClass{
+        border: #570448 3px dotted;
+            width: 89.5%;
+
+        }
+        .buttonClass{
+            width:90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+
+        }
+    </style>
+
+
 </head>
 <body>
 
@@ -18,43 +35,67 @@ let blocks=JSON.parse(params)
 
 
 function foo(blok) {
-    let id=document.createElement('p')
-    let name=document.createElement('p')
-    let username=document.createElement('p')
-    let email=document.createElement('p')
-    let street=document.createElement('p')
-    let suite=document.createElement('p')
-    let city=document.createElement('p')
-    let zipcode=document.createElement('p')
-    let lat =document.createElement('p')
-    let lng=document.createElement('p')
-    let phone=document.createElement('p')
-    let website=document.createElement('p')
-    let companyName=document.createElement('p')
-    let companycatchPhrase=document.createElement('p')
-    let companyBs=document.createElement('p')
-    id.innerText=` id- ${blok.id}`
-    name.innerText=`name - ${blok.name}`
-    username.innerText=`username - ${blok.username}`
-    email.innerText=` email- ${blok.email}`
-    street.innerText=`street - ${blok.address.street}`
-    suite.innerText=`suite - ${blok.address.suite}`
-    city.innerText=`city - ${blok.address.city}`
-    zipcode.innerText=`zipcode - ${blok.address.zipcode}`
-    lat.innerText=`lat - ${blok.address.geo.lat}`
-    lng.innerText=`lng - ${blok.address.geo.lng}`
-    phone.innerText=`phone - ${blok.phone}`
-    website.innerText=`website - ${blok.website}`
-    companyName.innerText=`companyName - ${blok.company.name}`
-    companycatchPhrase.innerText=`companycatchPhrase - ${blok.company.catchPhrase}`
-    companyBs.innerText=`companyBs - ${blok.company.bs}`
-    let divUser=document.createElement('div')
-    divUser.append(id,name,username,email,street,suite,city,zipcode,lat,lng,phone,website,companyName,companycatchPhrase,companyBs)
-    document.body.appendChild(divUser)
-    let button=document.createElement('button')
+    // let id=document.createElement('p')
+    // let name=document.createElement('p')
+    // let username=document.createElement('p')
+    // let email=document.createElement('p')
+    // let street=document.createElement('p')
+    // let suite=document.createElement('p')
+    // let city=document.createElement('p')
+    // let zipcode=document.createElement('p')
+    // let lat =document.createElement('p')
+    // let lng=document.createElement('p')
+    // let phone=document.createElement('p')
+    // let website=document.createElement('p')
+    // let companyName=document.createElement('p')
+    // let companycatchPhrase=document.createElement('p')
+    // let companyBs=document.createElement('p')
+    // id.innerText=` id- ${blok.id}`
+    // name.innerText=`name - ${blok.name}`
+    // username.innerText=`username - ${blok.username}`
+    // email.innerText=` email- ${blok.email}`
+    // street.innerText=`street - ${blok.address.street}`
+    // suite.innerText=`suite - ${blok.address.suite}`
+    // city.innerText=`city - ${blok.address.city}`
+    // zipcode.innerText=`zipcode - ${blok.address.zipcode}`
+    // lat.innerText=`lat - ${blok.address.geo.lat}`
+    // lng.innerText=`lng - ${blok.address.geo.lng}`
+    // phone.innerText=`phone - ${blok.phone}`
+    // website.innerText=`website - ${blok.website}`
+    // companyName.innerText=`companyName - ${blok.company.name}`
+    // companycatchPhrase.innerText=`companycatchPhrase - ${blok.company.catchPhrase}`
+    // companyBs.innerText=`companyBs - ${blok.company.bs}`
+    // let divUser=document.createElement('div')
+    // divUser.classList.add('divUserClass')
 
+    // document.body.appendChild(divUser)
+
+    // divUser.append(id,name,username,email,street,suite,city,zipcode,lat,lng,phone,website,companyName,companycatchPhrase,companyBs)
+
+    function rec(blokk) {
+        for (const value in blokk) {
+            if (typeof blokk[value]==='object'&& blokk[value] !== null){
+                let p=document.createElement('p')
+                p.innerText=`${value}:`;
+                main.append(p)
+                rec(blokk[value])
+            }
+            if (typeof blokk[value] !=='object'){
+                let pValue=document.createElement('p')
+                pValue.innerText=`${value}: ${blokk[value]}`
+                main.append(pValue)
+            }
+        }
+    }
+    let main=document.createElement('div')
+    rec(blok)
+    main.classList.add('divUserClass')
+    document.body.append(main)
+    let button=document.createElement('button')
+    button.classList.add('buttonClass')
     button.innerText='post of current user'
     document.body.append(button)
+
 
     button.onclick=function () {
         fetch(`https://jsonplaceholder.typicode.com/users/${blok.id}/posts`)
@@ -69,7 +110,7 @@ function foo(blok) {
                         document.body.append(divTitle)
                 }
             })
-
+button.disabled='true'
         // fetch(`https://jsonplaceholder.typicode.com/posts`)
         // .then(value => value.json())
         //     .then(posts => {
