@@ -56,10 +56,6 @@
     .then(users => {
         for (const user of users) {
             let div=document.createElement('div')
-            // let a=document.createElement('a')
-            // a.innerText=user.id+' '+user.name+' ';
-            // a.href='user-details.html?xxx='+JSON.stringify(user)
-
             let p=document.createElement('p')
             p.innerText=user.id+'. '+user.name+' ';
             let button=document.createElement('button')
@@ -67,7 +63,6 @@
             button.onclick=function () {
                 location.href='user-details.html?xxx='+JSON.stringify(user)
             }
-            // button.href='user-details.html?xxx='+JSON.stringify(user)
             div.append(p,button)
             div.classList.add('littleDiv')
             if (user.id<=5){
