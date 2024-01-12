@@ -6,6 +6,34 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Title</title>
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+        .divOver{
+            display: flex;
+            flex-wrap: wrap;
+            width: 100vw;
+        }
+        .divComent{
+            width: 23vw;
+            margin:0 1vw 1vh 0;
+            border: #00113b 1px dashed;
+            padding-left: 0.5vw;
+            background: rgba(137, 152, 210, 0.38);
+            color: #023b02;
+        }
+        .divPost{
+            border: rgba(222, 127, 60, 0.94) 1px solid;
+            width: 30vw;
+            margin:0 0 1vh 30vw;
+            padding-left: 1vw;
+            background: #a8a8e7;
+            color: #5e0202;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
 <script>
@@ -22,14 +50,18 @@
         title.innerText=`title- ${post.title}`
         body.innerText=`body- ${post.body}`
         let divPost=document.createElement('div')
+        divPost.classList.add('divPost')
         divPost.append(userId,id,title,body)
         document.body.append(divPost)
-
+        let divOver=document.createElement('div')
+        divOver.classList.add('divOver')
         fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`)
             .then(value => value.json())
             .then(postsComents => {
+
                 for (const coment of postsComents) {
                     let divComent=document.createElement('div')
+                    divComent.classList.add('divComent')
                     let postId=document.createElement('p')
                     let idComent=document.createElement('p')
                     let nameComent=document.createElement('p')
@@ -41,10 +73,11 @@
                     emailComent.innerText=`email- ${coment.email}`
                     bodyComent.innerText=`body- ${coment.body}`
                     divComent.append(postId,idComent,nameComent,emailComent,bodyComent)
-                    document.body.append(divComent)
+                    divOver.append(divComent)
                 }
-
             })
+
+        document.body.append(divOver)
     }
     fooPosts(posts)
 </script>
